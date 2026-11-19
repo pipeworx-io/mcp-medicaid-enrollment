@@ -1,0 +1,33 @@
+{
+  "name": "@pipeworx/mcp-medicaid-enrollment",
+  "version": "0.1.0",
+  "description": "Medicaid and CHIP enrollment, renewals, eligibility levels and waiver participation, by state. Live per-request reads of the CMS Medicaid open data catalog; nothing is stored here.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "mcp-medicaid-enrollment": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "medicaid-enrollment"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipeworx-io/mcp-medicaid-enrollment.git"
+  },
+  "mcpName": "io.github.pipeworx-io/medicaid-enrollment",
+  "pipeworx": {
+    "mode": "gateway",
+    "slug": "medicaid-enrollment",
+    "gatewaySlug": "medicaid-enrollment",
+    "sourceHash": "v1-ddeff08917983e3c45dd6e3c01a65e8a38db873aa8b40895e49b33a3be607dd9",
+    "sourceCommit": "afcaf44429ea5fe1396ff1733e1b8651aeefcde8"
+  }
+}

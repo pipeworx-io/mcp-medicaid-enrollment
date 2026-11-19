@@ -1,0 +1,434 @@
+[
+  {
+    "name": "medicaid_eligibility_levels",
+    "description": "Income eligibility limits for Medicaid and CHIP by state, as a percent of the federal poverty level: infants, children 1-5 and 6-18, pregnant women, parents and caretakers, expansion adults and separate CHIP. Omit state to compare all states. CMS, Medicaid and CHIP Eligibility Levels (a 2018 snapshot, not current rules).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Optional. Two-letter code or full name; omit for every state."
+        }
+      },
+      "required": []
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "states",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_new_adult_group",
+    "description": "Monthly Medicaid enrollment in the ACA new adult (expansion) group for one state, split into newly eligible and not newly eligible, beside total Medicaid enrollees. Where a month was reported more than once the latest CMS update is kept. CMS, Medicaid Enrollment - New Adult Group.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "US state or territory as a two-letter code (\"TX\") or full name (\"Texas\")."
+        },
+        "from_month": {
+          "type": "string",
+          "description": "First month, YYYYMM, e.g. \"202301\"."
+        },
+        "to_month": {
+          "type": "string",
+          "description": "Last month, YYYYMM, e.g. \"202512\"."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "months": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "months",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_renewal_outcomes",
+    "description": "Monthly Medicaid and CHIP renewal outcomes for one state: renewals due, renewed (ex parte vs renewal form), disenrolled (ineligible vs procedural), pending, with each as a share of renewals due. Covers the unwinding period through the latest reporting month. CMS, State Medicaid and CHIP Eligibility Processing Data.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "US state or territory as a two-letter code (\"TX\") or full name (\"Texas\")."
+        },
+        "from_month": {
+          "type": "string",
+          "description": "First month, YYYYMM, e.g. \"202301\"."
+        },
+        "to_month": {
+          "type": "string",
+          "description": "Last month, YYYYMM, e.g. \"202512\"."
+        },
+        "vintage": {
+          "type": "string",
+          "enum": [
+            "updated",
+            "original"
+          ],
+          "description": "updated (default) is the state's revised report; original is the first submission."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "months": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "months",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_unwinding_metrics",
+    "description": "Medicaid unwinding renewal metrics for one state in CMS's own metric terms (counts due, renewed, terminated, pending, and percent shares) from the 2024 monthly releases. Filter by metric wording, e.g. \"procedural\". CMS, Medicaid and CHIP Updated Renewal Outcomes.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "US state or territory as a two-letter code (\"TX\") or full name (\"Texas\")."
+        },
+        "metric": {
+          "type": "string",
+          "description": "Optional case-insensitive text matched inside the metric name, e.g. \"ex parte\" or \"procedural\"."
+        },
+        "from_month": {
+          "type": "string",
+          "description": "First month, YYYYMM, e.g. \"202301\"."
+        },
+        "to_month": {
+          "type": "string",
+          "description": "Last month, YYYYMM, e.g. \"202512\"."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "metrics",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_chip_enrollment",
+    "description": "Separate CHIP (S-CHIP) enrollment by month for one state, from T-MSIS reporting, with the data-through month and any CMS data note. CMS, Separate CHIP Enrollment by Month and State.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "US state or territory as a two-letter code (\"TX\") or full name (\"Texas\")."
+        },
+        "from_month": {
+          "type": "string",
+          "description": "First month, YYYYMM, e.g. \"202301\"."
+        },
+        "to_month": {
+          "type": "string",
+          "description": "Last month, YYYYMM, e.g. \"202512\"."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "months": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "months",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_enrollment_by_group",
+    "description": "Monthly Medicaid and CHIP enrollment by major eligibility group (children, adult, adult expansion group, aged, persons with disabilities) or by dual-eligible status (full, partial, not dual) for one state. CMS, Major Eligibility Group and Dual Status Information for Medicaid and CHIP Beneficiaries by Month.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "US state or territory as a two-letter code (\"TX\") or full name (\"Texas\")."
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "eligibility_group",
+            "dual_status"
+          ],
+          "description": "Which breakdown to return. Default eligibility_group."
+        },
+        "group": {
+          "type": "string",
+          "description": "Optional case-insensitive text matched inside the group or dual-status label, e.g. \"disab\" or \"full\"."
+        },
+        "from_month": {
+          "type": "string",
+          "description": "First month, YYYYMM, e.g. \"202301\"."
+        },
+        "to_month": {
+          "type": "string",
+          "description": "Last month, YYYYMM, e.g. \"202512\"."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "months": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "months",
+        "source",
+        "interpretation"
+      ]
+    }
+  },
+  {
+    "name": "medicaid_hcbs_waiver_participants",
+    "description": "How many Medicaid enrollees are in a Section 1915(c) home and community-based services waiver, by state and year (2020-2022), with the share of all enrollees and breakdowns by age, dual status, eligibility category and race/ethnicity. CMS, Section 1915(c) waiver program participants.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Two-letter code or full name; omit for every geography."
+        },
+        "year": {
+          "type": "number",
+          "description": "Year 2020-2022; omit for all."
+        },
+        "breakdown": {
+          "type": "string",
+          "description": "Optional topic: \"Age group\", \"Dual eligible status\", \"Eligibility category\" or \"Race and ethnicity\". Omit for the overall figure."
+        }
+      },
+      "required": []
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number"
+        },
+        "returned": {
+          "type": "number"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "source": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "returned",
+        "rows",
+        "source",
+        "interpretation"
+      ]
+    }
+  }
+]
